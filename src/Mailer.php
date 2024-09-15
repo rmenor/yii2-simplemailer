@@ -5,13 +5,21 @@ namespace rmenor\simplemailer;
 use PHPMailer\PHPMailer\PHPMailer;
 use yii\base\Component;
 
+/**
+ * Example use:
+ * Yii::$app->simplemailer->sendMail($email, $subject, $body);
+ */
+
 class Mailer extends Component
 {
+
     public $host;
     public $username;
     public $password;
     public $port = 587;
     public $encryption = PHPMailer::ENCRYPTION_STARTTLS;
+    public $fromEmail;
+    public $fromName;
 
     public function sendMail($to, $subject, $body)
     {
@@ -28,7 +36,7 @@ class Mailer extends Component
             $mail->Port       = $this->port;
 
             // Destinatarios
-            $mail->setFrom($this->username, 'Mailer');
+            $mail->setFrom($this->fromEmail, $this->fromName);
             $mail->addAddress($to);
 
             // Contenido del correo
