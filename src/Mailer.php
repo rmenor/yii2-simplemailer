@@ -20,6 +20,7 @@ class Mailer extends Component
     public $encryption = PHPMailer::ENCRYPTION_STARTTLS;
     public $fromEmail;
     public $fromName;
+    public $charset = 'UTF-8';
 
     public function sendMail($to, $subject, $body)
     {
@@ -27,6 +28,7 @@ class Mailer extends Component
 
         try {
             // Configuración del servidor SMTP
+            $mail->CharSet    = $this->charset;
             $mail->isSMTP();
             $mail->Host       = $this->host;
             $mail->SMTPAuth   = true;
